@@ -1,0 +1,41 @@
+no perfil:
+- jogos jogados: ano, mes, semanaa
+- horas jogadas: ano, mes, semana
+- plataformas favoritas: ano, mês, semana (gráfico em barras horizontal)
+
+na lista:
+exibir no topo: qtd de jogos, qtd de jogos zerados (%x), qtd de horas jogadas
+
+
+barra lateral esquerda:
+
+Olá, Salies
+- Meu perfil
+- Meus jogos
+- Minhas listas
+[espaçador]
+Sair
+
+list_member {
+	member_id (necessário pois um jogo pode aparecer várias vezes numa mesma lista)
+	list_id
+	game_id
+}
+
+foda-se isso, facilita
+
+list_member_game {
+	list_id
+	game_id
+}
+
+game_beaten {
+	list id
+	game_id
+	rating,
+	started_date,
+	finished_date,
+	seconds_played,
+	mastered,
+	created_at
+}

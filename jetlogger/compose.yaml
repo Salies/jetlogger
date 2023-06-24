@@ -6,4 +6,4 @@ services:
       - 'POSTGRES_PASSWORD=batata'
       - 'POSTGRES_USER=postgres'
     ports:
-      - '5432'
+      - '60409:5432'

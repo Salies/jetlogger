@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jetlogger</title>
+    <link th:href="@{/css/pico.min.css}" href="../static/css/pico.min.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="../static/css/login.css" />
+  </head>
+  <body>
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="./" class="contrast" onclick="event.preventDefault()">
+            <strong>jetlogger</strong>
+            </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <main class="container">
+      <article class="grid">
+        <div>
+        <h3>Bem-vindo ao Jetlogger!</h3>
+        <p th:if="${param.error}" class="error">Usuário ou senha inválidos</p>
+          <form th:action="@{/login}" method="post">
+            <input
+              type="text"
+              name="username"
+              placeholder="Nome de usuário"
+              aria-label="username"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              aria-label="password"
+              required
+            />
+            <button
+              type="submit"
+              class="contrast"
+            >
+              Login
+            </button>
+          </form>
+          <span>
+            <a href="">Criar conta</a>
+            •
+            <a href="https://youtu.be/nsCIeklgp1M?t=49">Esqueceu a senha?</a>
+          </span>
+        </div>
+        <div></div>
+      </article>
+    </main>
+    <!-- ./ Main -->
+
+    <!-- Footer -->
+    <footer class="container-fluid">
+      <small>Built by 
+        <a href="https://github.com/CaduSantana" target="_blank" class="secondary">
+          Cadu Santana
+        </a> 
+        and
+        <a href="https://github.com/Salies" target="_blank" class="secondary">
+          Daniel Serezane
+        </a>
+      </small>
+    </footer>
+  </body>
+</html>

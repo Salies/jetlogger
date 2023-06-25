@@ -66,13 +66,12 @@ summary[role="link"].secondary:is([aria-current], :hover, :active, :focus) {
   color: var(--secondary-hover);
 }
 
-/* Hero Image */
 article div:nth-of-type(2) {
   display: none;
   background-color: #374956;
-  background-image: url("../img/login.webp");
   background-position: center;
   background-size: cover;
+  background-image: url('../img/login.webp');
 }
 
 @media (min-width: 992px) {
@@ -90,4 +89,8 @@ body > main > article > div:nth-child(1) > span {
   display: block;
   text-align: right;
   width: 100%;
+}
+
+.error {
+  color: #c54a69;
 }

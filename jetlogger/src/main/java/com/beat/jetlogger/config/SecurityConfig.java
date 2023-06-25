@@ -1,6 +1,7 @@
 package com.beat.jetlogger.config;
 
 import com.beat.jetlogger.service.JetUserDetailsService;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -25,12 +26,17 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // Permite que pedidos ao diretório /static (de recursos estáticos)
+        // sejam respondidos sem necessidade de autenticação.
         http
-                .authorizeRequests(authorize -> authorize
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/css/**", "/img/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults());
+                .formLogin(form -> form.loginPage("/login")
+                        .permitAll()
+                );
+
         return http.build();
     }
 

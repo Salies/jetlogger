@@ -38,4 +38,12 @@ public class Game {
     @Column(name = "created_at")
     @CreationTimestamp
     @Getter private LocalDateTime addedAt;
+
+    public Game() {}
+
+    public Game(GameList list, String gameName, String platform) {
+        this.list = list;
+        this.gameName = gameName;
+        this.platform = platform;
+    }
 }

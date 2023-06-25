@@ -27,4 +27,12 @@ public class GameList {
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
     @Getter @Setter private LocalDate createdAt;
+
+    public GameList() {}
+
+    public GameList(String listName, JetUser jetUserCreated) {
+        this.id = UUID.randomUUID();
+        this.listName = listName;
+        this.jetUserCreated = jetUserCreated;
+    }
 }

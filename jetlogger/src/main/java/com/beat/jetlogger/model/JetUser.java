@@ -3,14 +3,27 @@ package com.beat.jetlogger.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "jet_user")
-public class JetUser {
+public class JetUser implements UserDetails {
+    public JetUser() {}
+
+    public JetUser(String username, String password, String displayName, String realName) {
+        this.id = UUID.randomUUID();
+        this.username = username;
+        this.password = password;
+        this.displayName = displayName;
+        this.realName = realName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
@@ -31,4 +44,29 @@ public class JetUser {
     @Basic(optional = false)
     @Column(name = "real_name", nullable = false, length = 128)
     private String realName;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

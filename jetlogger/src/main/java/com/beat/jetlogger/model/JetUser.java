@@ -24,6 +24,14 @@ public class JetUser implements UserDetails {
         this.realName = realName;
     }
 
+    public JetUser(String username, String password, String displayName) {
+        this.id = UUID.randomUUID();
+        this.username = username;
+        this.password = password;
+        this.displayName = displayName;
+        this.realName = displayName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)

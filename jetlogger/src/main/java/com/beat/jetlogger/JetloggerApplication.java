@@ -18,7 +18,7 @@ public class JetloggerApplication {
     @Bean
     CommandLineRunner commandLineRunner(JetUserRepository jetUserRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            jetUserRepository.save(new JetUser("jet", passwordEncoder.encode("radio"), "Jet", "Jet"));
+            //jetUserRepository.save(new JetUser("jet", passwordEncoder.encode("radio"), "Jet", "Jet"));
         };
     }
 

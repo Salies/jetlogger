@@ -17,27 +17,27 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "game_id", nullable = false)
-    @Getter private UUID id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "list_id", nullable = false)
-    @Getter private GameList list;
+    private GameList list;
 
     @Basic(optional = false)
     @Column(name = "game_name")
-    @Getter @Setter private String gameName;
+    private String gameName;
 
     // Opcional
     @Column(name = "cover_art_url", length = 2048)
-    @Getter @Setter private String coverArtUrl;
+    private String coverArtUrl;
 
     @Basic(optional = false)
     @Column(name = "platform")
-    @Getter @Setter private String platform;
+    private String platform;
 
     @Column(name = "created_at")
     @CreationTimestamp
-    @Getter private LocalDateTime addedAt;
+    private LocalDateTime addedAt;
 
     public Game() {}
 

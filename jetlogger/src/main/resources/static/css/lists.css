@@ -22,7 +22,7 @@ hr {
 
 @media (min-width: 576px) {
     .filters {
-        max-width: 640px;
+        max-width: 840px;
     }
 }
 
@@ -50,4 +50,8 @@ summary[role="link"].secondary:is([aria-current], :hover, :active, :focus) {
 
 footer {
     padding: 0 0 0 1rem!important;
+}
+
+button {
+    margin: 0 0 0 1rem;
 }

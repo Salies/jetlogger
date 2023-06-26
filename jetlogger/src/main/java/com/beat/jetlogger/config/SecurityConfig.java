@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.server.authentication.logout.DelegatingServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.SecurityContextServerLogoutHandler;
+import org.springframework.security.web.server.authentication.logout.WebSessionServerLogoutHandler;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -38,9 +41,8 @@ public class SecurityConfig {
                         .requestMatchers(allowed).permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.loginPage("/login")
-                        .permitAll()
-                );
+                .formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/lists", true).permitAll())
+                .logout((logout) -> logout.logoutSuccessUrl("/login"));
 
         return http.build();
     }

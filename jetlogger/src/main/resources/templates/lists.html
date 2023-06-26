@@ -23,6 +23,11 @@
       th:href="@{/css/lists.css}"
       href="../static/css/lists.css"
     />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/fix-nav.css}"
+      href="../static/css/fix-nav.css"
+    />
   </head>
   <body>
     <nav class="container-fluid">
@@ -38,8 +43,13 @@
           <details role="list" dir="rtl">
             <summary aria-haspopup="listbox" role="link" class="secondary" th:text="${displayName}"></summary>
             <ul role="listbox">
-              <li><a href="#">Minhas listas</a></li>
-              <li><a href="#">Sair</a></li>
+              <li><a href="./lists">Minhas listas</a></li>
+              <li>
+                <form class="logout-form" th:action="@{/logout}" method=post>
+                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                  <input class="logout-input secondary" type="submit" value="Sair"></input>
+                </form>
+              </li>
             </ul>
           </details>
         </li>
@@ -50,32 +60,40 @@
     <main class="container">
       <div>
         <h1>Relatório geral</h1>
-        <div class="filters">
-          <span>Plataforma:</span>
-          <select>
-            <option value="all" selected>Todas</option>
-            <option>Xbox 360</option>
-          </select>
-          <span>Período:</span>
-          <select>
-            <option value="all" selected>Desde sempre</option>
-            <option value="year">Último ano</option>
-            <option value="month">Último mês</option>
-            <option value="week">Última semana</option>
-          </select>
-        </div>
+        <form th:action="@{/lists}" method="get">
+          <div class="filters">
+              <span>Plataforma:</span>
+              <select name="platform">
+                <option value="all" th:selected="${param.platform[0]} == 'all'">Todas</option>
+                <option 
+                  th:each="platform: ${platforms}" 
+                  th:value="${platform}" 
+                  th:text="${platform}"
+                  th:selected="${param.platform[0]} == ${platform}"
+                ></option>
+              </select>
+              <span>Período:</span>
+              <select name="date_range">
+                <option value="all" th:selected="${param.date_range[0]} == 'all'">Desde sempre</option>
+                <option value="year" th:selected="${param.date_range[0]} == 'year'">Último ano</option>
+                <option value="month" th:selected="${param.date_range[0]} == 'month'">Último mês</option>
+                <option value="week" th:selected="${param.date_range[0]} == 'week'">Última semana</option>
+              </select>
+              <button type="submit" class="contrast">Filtrar</button>
+          </div>
+        </form>
         <div class="grid stats">
           <div class="games-info">
-            <span>42</span>
+            <span th:text="${countGames}"></span>
+            <span>jogos adicionados</span>
+          </div>
+          <div class="games-info">
+            <span>42.5h</span>
             <span>jogos zerados</span>
           </div>
           <div class="games-info">
             <span>42.5h</span>
             <span>em tempo de jogo</span>
-          </div>
-          <div class="games-info">
-            <span>42</span>
-            <span>jogos mestrados</span>
           </div>
         </div>
       </div>

@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -38,13 +37,20 @@ public class Game implements Serializable {
 
     @Column(name = "created_at")
     @CreationTimestamp
-    private LocalDateTime addedAt;
+    private LocalDateTime createdAt;
 
     public Game() {}
 
     public Game(GameList list, String gameName, String platform) {
         this.list = list;
         this.gameName = gameName;
+        this.platform = platform;
+    }
+
+    public Game(GameList list, String gameName, String coverArtUrl, String platform) {
+        this.list = list;
+        this.gameName = gameName;
+        this.coverArtUrl = coverArtUrl;
         this.platform = platform;
     }
 }

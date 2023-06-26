@@ -6,10 +6,7 @@ import com.beat.jetlogger.repository.GameListRepository;
 import com.beat.jetlogger.repository.GameRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -47,6 +44,37 @@ public class GameController {
         GameList list = gameListRepository.findById(UUID.fromString(listId)).orElseThrow();
         Game game = new Game(list, name, platform);
         gameRepository.save(game);
+        return "redirect:/list/" + listId;
+    }
+
+    @GetMapping("/game/{id}/edit")
+    public String getEditGame(@PathVariable("id") String gameId, Model model) {
+        Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
+        String listName = game.getList().getName();
+        model.addAttribute("listName", listName);
+        model.addAttribute("format", "Editar");
+        model.addAttribute("game", game);
+        return "create-game";
+    }
+
+    @PostMapping("/game/{id}/edit")
+    public String postEditGame(
+            @RequestParam("name") String name,
+            @RequestParam("platform") String platform,
+            @PathVariable("id") String gameId
+    ) {
+        Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
+        game.setGameName(name);
+        game.setPlatform(platform);
+        gameRepository.save(game);
+        return "redirect:/list/" + game.getList().getId();
+    }
+
+    @GetMapping("/game/{id}/delete")
+    public String postDeleteGame(@PathVariable("id") String gameId) {
+        Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
+        UUID listId = game.getList().getId();
+        gameRepository.delete(game);
         return "redirect:/list/" + listId;
     }
 }

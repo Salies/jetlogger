@@ -33,10 +33,10 @@
         </div>
         <button type="submit" class="contrast">Adicionar jogo na lista</button>
       </form>
-      <form th:if="${format == 'Editar'}" th:action="'/game/' + ${gameId}" method="post">
+      <form th:if="${format == 'Editar'}" th:action="'/game/' + ${game.id} + '/edit'" method="post">
         <div class="grid">
-          <input type="text" name="name" placeholder="Nome" aria-label="name" th:value="${gameName}" required />
-          <input type="text" name="platform" placeholder="Plataforma" aria-label="platform" th:value="${gamePlatform}" required />
+          <input type="text" name="name" placeholder="Nome" aria-label="name" th:value="${game.gameName}" required />
+          <input type="text" name="platform" placeholder="Plataforma" aria-label="platform" th:value="${game.platform}" required />
         </div>
         <button type="submit" class="contrast">Editar jogo</button>
       </form>

@@ -1,0 +1,7 @@
+com.beat.jetlogger
+com.beat.jetlogger.config
+com.beat.jetlogger.controller
+com.beat.jetlogger.model
+com.beat.jetlogger.projections
+com.beat.jetlogger.repository
+com.beat.jetlogger.service

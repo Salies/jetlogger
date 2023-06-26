@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.beat.jetlogger"},{"l":"com.beat.jetlogger.config"},{"l":"com.beat.jetlogger.controller"},{"l":"com.beat.jetlogger.model"},{"l":"com.beat.jetlogger.projections"},{"l":"com.beat.jetlogger.repository"},{"l":"com.beat.jetlogger.service"}];updateSearchResults();

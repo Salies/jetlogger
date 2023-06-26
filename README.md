@@ -9,6 +9,7 @@ A gaming backlog manager in Java.
 ## Tecnologias utilizadas
 
 * JDK 17
+* Lombok
 * Docker via WSL 2.0 (Ubuntu 22.04.2 LTS)
 * PostgreSQL 15 (latest, via Docker)
 * Spring Boot 6 (não reativo, não MVC pois este foi *deprecated*)

@@ -27,10 +27,6 @@ public class Game implements Serializable {
     @Column(name = "game_name")
     private String gameName;
 
-    // Opcional
-    @Column(name = "cover_art_url", length = 2048)
-    private String coverArtUrl;
-
     @Basic(optional = false)
     @Column(name = "platform")
     private String platform;
@@ -44,13 +40,6 @@ public class Game implements Serializable {
     public Game(GameList list, String gameName, String platform) {
         this.list = list;
         this.gameName = gameName;
-        this.platform = platform;
-    }
-
-    public Game(GameList list, String gameName, String coverArtUrl, String platform) {
-        this.list = list;
-        this.gameName = gameName;
-        this.coverArtUrl = coverArtUrl;
         this.platform = platform;
     }
 }

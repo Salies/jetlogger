@@ -59,7 +59,7 @@
     <!-- Main -->
     <main class="container">
       <div>
-        <h1>Relatório geral</h1>
+        <h1>Relatório da lista</h1>
         <form th:action="@{/lists}" method="get">
           <div class="filters">
               <span>Plataforma:</span>
@@ -102,18 +102,22 @@
       </div>
       <hr />
       <div>
-        <h1>Suas listas de jogos</h1>
+        <h1>Jogos da lista</h1>
         <table>
           <thead>
             <tr>
-              <th scope="col">Nome da lista</th>
-              <th scope="col">Criada em</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Plataforma</th>
+              <th scope="col">Adicionado em</th>
+              <th scope="col">Marcar</th>
             </tr>
           </thead>
           <tbody>
-            <tr th:each="gameList: ${gameLists}">
-              <td><a class="contrast" th:href="@{'/list/' + ${gameList.id}}" th:text="${gameList.name}"></a></td>
-              <td th:text="${#temporals.format(gameList.createdAt, 'dd/MM/yyyy')}"/>
+            <tr>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td><button><img src="@{/img/check-circle.svg}"></button></td>
             </tr>
           </tbody>
         </table>

@@ -14,11 +14,14 @@ import java.util.UUID;
 @Table(name = "game_log")
 public class GameLog {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
+    private UUID id;
+
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
     @Getter private Game game;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "list_id", nullable = false)
     @Getter private GameList list;
@@ -41,4 +44,17 @@ public class GameLog {
     @Column(name = "created_at", nullable = false)
     @CreationTimestamp
     @Getter @Setter private LocalDate createdAt;
+
+    public GameLog() {
+    }
+
+    public GameLog(Game game, GameList list, Integer rating, LocalDate startedDate, LocalDate finishedDate, Integer secondsPlayed, Boolean mastered) {
+        this.game = game;
+        this.list = list;
+        this.rating = rating;
+        this.startedDate = startedDate;
+        this.finishedDate = finishedDate;
+        this.secondsPlayed = secondsPlayed;
+        this.mastered = mastered;
+    }
 }

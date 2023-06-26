@@ -1,6 +1,7 @@
 package com.beat.jetlogger.repository;
 
 import com.beat.jetlogger.model.Game;
+import com.beat.jetlogger.model.GameList;
 import com.beat.jetlogger.model.JetUser;
 import com.beat.jetlogger.projections.Platform;
 import org.springframework.data.repository.CrudRepository;
@@ -14,4 +15,5 @@ public interface GameRepository extends CrudRepository<Game, UUID> {
     Integer countByListJetUserCreatedAndCreatedAtAfter(JetUser user, LocalDateTime date);
     Integer countByListJetUserCreatedAndPlatformAndCreatedAtAfter(JetUser user, String platform, LocalDateTime date);
     Iterable<Platform> findAllByListJetUserCreated(JetUser user);
+    Iterable<Game> findAllByList(GameList list);
 }

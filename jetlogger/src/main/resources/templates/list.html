@@ -28,6 +28,11 @@
       th:href="@{/css/fix-nav.css}"
       href="../static/css/fix-nav.css"
     />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/list.css}"
+      href="../static/css/list.css"
+    />
   </head>
   <body>
     <nav class="container-fluid">
@@ -43,7 +48,7 @@
           <details role="list" dir="rtl">
             <summary aria-haspopup="listbox" role="link" class="secondary" th:text="${displayName}"></summary>
             <ul role="listbox">
-              <li><a href="./lists">Minhas listas</a></li>
+              <li><a href="/lists">Minhas listas</a></li>
               <li>
                 <form class="logout-form" th:action="@{/logout}" method=post>
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -102,7 +107,7 @@
       </div>
       <hr />
       <div>
-        <h1>Jogos da lista</h1>
+        <h1>Jogos pendentes</h1>
         <table>
           <thead>
             <tr>
@@ -117,7 +122,34 @@
               <td>a</td>
               <td>a</td>
               <td>a</td>
-              <td><button><img src="@{/img/check-circle.svg}"></button></td>
+              <td><button class="zera-btn contrast"><img th:src="@{/img/check-circle.svg}"></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h1>Jogos zerados</h1>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Plataforma</th>
+              <th scope="col">Adicionado em</th>
+              <th scope="col">Iniciado em</th>
+              <th scope="col">Finalizado em</th>
+              <th scope="col">Tempo de jogo</th>
+              <th scope="col">Mestrado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td>a</td>
+              <td>não</td>
             </tr>
           </tbody>
         </table>

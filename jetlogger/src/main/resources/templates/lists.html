@@ -43,7 +43,7 @@
           <details role="list" dir="rtl">
             <summary aria-haspopup="listbox" role="link" class="secondary" th:text="${displayName}"></summary>
             <ul role="listbox">
-              <li><a href="./lists">Minhas listas</a></li>
+              <li><a href="/lists">Minhas listas</a></li>
               <li>
                 <form class="logout-form" th:action="@{/logout}" method=post>
                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

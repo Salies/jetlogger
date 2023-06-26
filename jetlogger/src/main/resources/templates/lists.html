@@ -83,30 +83,18 @@
       <div>
         <h1>Suas listas de jogos</h1>
         <table>
-          <!--<thead>
+          <thead>
             <tr>
               <th scope="col">Nome da lista</th>
               <th scope="col">Criada em</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>batata</td>
-              <td>1/1/1</td>
+            <tr th:each="gameList: ${gameLists}">
+              <td><a class="contrast" th:href="@{'/list/' + ${gameList.id}}" th:text="${gameList.name}"></a></td>
+              <td th:text="${#temporals.format(gameList.createdAt, 'dd/MM/yyyy')}"/>
             </tr>
-            <tr>
-              <td>batata</td>
-              <td>1/1/1</td>
-            </tr>
-            <tr>
-              <td>batata</td>
-              <td>1/1/1</td>
-            </tr>
-          </tbody>-->
-          <tr th:each="gameList: ${gameLists}">
-            <td th:text="${gameList.name}" />
-            <td th:text="${gameList.createdAt}" />
-          </tr>
+          </tbody>
         </table>
       </div>
     </main>

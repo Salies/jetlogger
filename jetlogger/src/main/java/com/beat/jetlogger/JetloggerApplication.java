@@ -25,7 +25,7 @@ public class JetloggerApplication {
     CommandLineRunner commandLineRunner(JetUserRepository jetUserRepository, PasswordEncoder passwordEncoder,
                                         GameListRepository gameListRepository) {
         return args -> {
-            try {
+            /*try {
                 jetUserRepository.save(new JetUser(
                         "gum",
                         passwordEncoder.encode("radio"),
@@ -41,7 +41,7 @@ public class JetloggerApplication {
                         "lista teste",
                         jetUser
                 ));
-            }
+            }*/
         };
     }
 

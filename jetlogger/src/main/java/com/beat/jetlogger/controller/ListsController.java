@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -112,6 +113,20 @@ public class ListsController {
         model.addAttribute("countPlayed", countPlayed);
 
         return "lists";
+    }
+
+    @GetMapping("/list/create")
+    String createList() {
+        return "create-list";
+    }
+
+    @PostMapping("/list/create")
+    String postCreateList(@RequestParam String name, Authentication authentication){
+        JetUser user = ((SecurityUser) authentication.getPrincipal()).getUser();
+        GameList list = new GameList(name, user);
+        this.gameListRepository.save(list);
+
+        return "redirect:/lists";
     }
 
     @GetMapping("/list/{id}")

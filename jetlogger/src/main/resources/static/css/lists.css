@@ -52,6 +52,15 @@ footer {
     padding: 0 0 0 1rem!important;
 }
 
-button {
+.filters button {
     margin: 0 0 0 1rem;
+}
+
+.new-list {
+    max-width: 190px;
+    float: right;
+}
+
+.lists-div {
+    overflow: overlay;
 }

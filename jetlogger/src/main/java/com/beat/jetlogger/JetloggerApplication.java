@@ -12,36 +12,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class JetloggerApplication {
-
+    /**
+     * Main method da aplicação.
+     * @param args argumentos da linha de comando (nenhum esperado)
+     */
     public static void main(String[] args) {
         SpringApplication.run(JetloggerApplication.class, args);
     }
-
-    @Bean
-    CommandLineRunner commandLineRunner(JetUserRepository jetUserRepository, PasswordEncoder passwordEncoder,
-                                        GameListRepository gameListRepository,
-                                        GameRepository gameRepository,
-                                        GameLogRepository gameLogRepository) {
-        return args -> {
-                // user d79774fa-71dd-4879-8da8-ef17eb373e67
-                // list ef50e48e-9a37-4722-881b-e63e6f5ce28c
-                // game 3404c91e-85fb-4a9b-acc1-6681624763bc
-            /*Optional<JetUser> user = jetUserRepository.findById(UUID.fromString("d79774fa-71dd-4879-8da8-ef17eb373e67"));
-            Optional<GameList> list = gameListRepository.findById(UUID.fromString("ef50e48e-9a37-4722-881b-e63e6f5ce28c"));
-            Optional<Game> game = gameRepository.findById(UUID.fromString("3404c91e-85fb-4a9b-acc1-6681624763bc"));
-            if(user.isPresent() && list.isPresent() && game.isPresent()) {
-                GameLog gameLog = new GameLog(
-                        game.get(),
-                        list.get(),
-                        5,
-                        LocalDate.now(),
-                        LocalDate.now(),
-                        3600,
-                        true
-                );
-                gameLogRepository.save(gameLog);
-            }*/
-        };
-    }
-
 }

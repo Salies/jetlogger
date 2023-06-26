@@ -24,12 +24,23 @@ public class ListsController {
     private final GameRepository gameRepository;
     private final GameLogRepository gameLogRepository;
 
+    /**
+     * Construtor do controlador responsável pelas listas.
+     * @param gameListRepository Spring Data JPA repository para a entidade GameList.
+     * @param gameRepository Spring Data JPA repository para a entidade Game.
+     * @param gameLogRepository Spring Data JPA repository para a entidade GameLog.
+     */
     ListsController(GameListRepository gameListRepository, GameRepository gameRepository, GameLogRepository gameLogRepository) {
         this.gameListRepository = gameListRepository;
         this.gameRepository = gameRepository;
         this.gameLogRepository = gameLogRepository;
     }
 
+    /**
+     * Converte uma range de datas para um LocalDateTime.
+     * @param dateRange String que representa o range de datas.
+     * @return LocalDateTime que representa o range de datas.
+     */
     private LocalDateTime fromDateRange(String dateRange) {
         return switch (dateRange) {
             case "week" -> LocalDateTime.now().minusWeeks(1);
@@ -39,6 +50,14 @@ public class ListsController {
         };
     }
 
+    /**
+     * Rota para a página de listas do usuário.
+     * @param authentication Autenticação do usuário.
+     * @param model Modelo da página.
+     * @param platform Filtro para plataforma de jogos (se houver).
+     * @param dateRange Filtro para range de datas (se houver).
+     * @return Caminho para o template da página de listas.
+     */
     @GetMapping("/lists")
     String lists(
             Authentication authentication,
@@ -113,11 +132,21 @@ public class ListsController {
         return "lists";
     }
 
+    /**
+     * Rota GET para a página de criação de listas.
+     * @return Caminho para o template da página de criação de listas.
+     */
     @GetMapping("/list/create")
     String createList() {
         return "create-list";
     }
 
+    /**
+     * Rota POST para a criação de listas.
+     * @param name Nome da lista.
+     * @param authentication Autenticação do usuário.
+     * @return Redirecionamento para a página de listas.
+     */
     @PostMapping("/list/create")
     String postCreateList(@RequestParam String name, Authentication authentication){
         JetUser user = ((SecurityUser) authentication.getPrincipal()).getUser();
@@ -127,6 +156,15 @@ public class ListsController {
         return "redirect:/lists";
     }
 
+    /**
+     * Rota GET para visualização de uma lista.
+     * @param authentication Autenticação do usuário.
+     * @param model Modelo da página.
+     * @param id ID da lista.
+     * @param platform Filtro para plataforma de jogos (se houver).
+     * @param dateRange Filtro para range de datas (se houver).
+     * @return Caminho para o template da página de visualização de uma lista.
+     */
     @GetMapping("/list/{id}")
     String list(
             Authentication authentication,

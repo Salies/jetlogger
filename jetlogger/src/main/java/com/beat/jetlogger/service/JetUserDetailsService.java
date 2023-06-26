@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 public class JetUserDetailsService implements UserDetailsService {
     private final JetUserRepository jetUserRepository;
 
+    /**
+     * Construtor para implementação do user repository do projeto.
+     * @param jetUserRepository User repository para os usuários da plataforma.
+     */
     public JetUserDetailsService(JetUserRepository jetUserRepository) {
         this.jetUserRepository = jetUserRepository;
     }

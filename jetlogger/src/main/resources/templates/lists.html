@@ -36,9 +36,7 @@
       <ul>
         <li>
           <details role="list" dir="rtl">
-            <summary aria-haspopup="listbox" role="link" class="secondary">
-              Salies
-            </summary>
+            <summary aria-haspopup="listbox" role="link" class="secondary" th:text="${displayName}"></summary>
             <ul role="listbox">
               <li><a href="#">Minhas listas</a></li>
               <li><a href="#">Sair</a></li>
@@ -85,7 +83,7 @@
       <div>
         <h1>Suas listas de jogos</h1>
         <table>
-          <thead>
+          <!--<thead>
             <tr>
               <th scope="col">Nome da lista</th>
               <th scope="col">Criada em</th>
@@ -104,7 +102,11 @@
               <td>batata</td>
               <td>1/1/1</td>
             </tr>
-          </tbody>
+          </tbody>-->
+          <tr th:each="gameList: ${gameLists}">
+            <td th:text="${gameList.name}" />
+            <td th:text="${gameList.createdAt}" />
+          </tr>
         </table>
       </div>
     </main>

@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.UUID;
 
 public class SecurityUser implements UserDetails {
     private final JetUser user;
@@ -22,6 +23,10 @@ public class SecurityUser implements UserDetails {
     @Override
     public String getPassword() {
         return user.getPassword();
+    }
+
+    public JetUser getUser() {
+        return user;
     }
 
     @Override

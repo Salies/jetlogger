@@ -40,6 +40,9 @@ public class JetUser implements UserDetails {
     @Column(name = "display_name", nullable = false, length = 32)
     private String displayName;
 
+    @OneToMany(mappedBy = "jetUserCreated")
+    private Collection<GameList> gameLists;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

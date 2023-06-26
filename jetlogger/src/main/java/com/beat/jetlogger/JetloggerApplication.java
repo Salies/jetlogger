@@ -1,9 +1,5 @@
 package com.beat.jetlogger;
 
-import com.beat.jetlogger.model.Game;
-import com.beat.jetlogger.model.GameList;
-import com.beat.jetlogger.model.GameLog;
-import com.beat.jetlogger.model.JetUser;
 import com.beat.jetlogger.repository.GameListRepository;
 import com.beat.jetlogger.repository.GameLogRepository;
 import com.beat.jetlogger.repository.GameRepository;
@@ -13,12 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.thymeleaf.spring6.SpringTemplateEngine;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
 
 @SpringBootApplication
 public class JetloggerApplication {

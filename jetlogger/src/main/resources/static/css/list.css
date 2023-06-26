@@ -2,3 +2,22 @@
     margin: 0;
     width: 66px;
 }
+
+.delete{
+    background-color: #e53935;
+    border-color: #e53935;
+    color: #fff;
+}
+
+.game-options {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.game-options a {
+    margin-right: 0.5rem;
+}
+
+.game-options a:last-of-type{
+    margin-right: 0;
+}

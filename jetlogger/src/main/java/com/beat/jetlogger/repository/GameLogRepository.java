@@ -3,10 +3,12 @@ package com.beat.jetlogger.repository;
 import com.beat.jetlogger.model.GameList;
 import com.beat.jetlogger.model.GameLog;
 import com.beat.jetlogger.model.JetUser;
+import com.beat.jetlogger.projections.FullGame;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public interface GameLogRepository extends CrudRepository<GameLog, UUID> {
@@ -19,6 +21,12 @@ public interface GameLogRepository extends CrudRepository<GameLog, UUID> {
     Integer countByListAndGamePlatform(GameList list, String platform);
     Integer countByListAndFinishedDateAfter(GameList list, LocalDate date);
     Integer countByListAndGamePlatformAndFinishedDateAfter(GameList list, String platform, LocalDate date);
+
+    // fill all GameLog by GameList, join with Game
+    @Query("SELECT g.game.gameName AS gameName, g.game.platform AS platform, g.game.createdAt AS createdAt, g.game.id as gameId, " +
+            "g.secondsPlayed AS secondsPlayed, g.rating AS rating, g.startedDate AS startedDate, g.finishedDate AS finishedDate, g.mastered AS mastered " +
+            "FROM GameLog g WHERE g.list = ?1")
+    List<FullGame> findAllByList(GameList list);
 
     // sum of seconds_played by JetUser
     @Query("SELECT SUM(g.secondsPlayed) FROM GameLog g WHERE g.list.jetUserCreated = ?1")

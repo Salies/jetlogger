@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jetlogger - Adicionar jogo</title>
+  <link th:href="@{/css/pico.min.css}" href="../static/css/pico.min.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" th:href="@{/img/fav.ico}" href="../static/img/fav.ico"/>
+  <link th:href="@{/css/register.css}" href="../static/css/register.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="container-fluid">
+  <ul>
+    <li>
+      <a href="/" class="contrast">
+        <strong>jetlogger</strong>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Main -->
+<main class="container">
+  <article>
+    <div>
+      <hgroup>
+        <h2>Criar conta</h2>
+        <h3>Dê um nome a sua lista!</h3>
+      </hgroup>
+      <form th:action="@{/game/create}" method="post">
+        <input type="text" name="name" placeholder="Nome da lista" aria-label="name" required />
+        <button type="submit" class="contrast">Criar lista</button>
+      </form>
+      <a href="/lists" class="secondary">Voltar</a>
+    </div>
+  </article>
+</main>
+<!-- ./ Main -->
+
+<!-- Footer -->
+<footer class="container-fluid">
+  <small>Built by
+      <a href="https://github.com/CaduSantana" target="_blank" class="secondary">Cadu Santana</a>
+      and
+      <a href="https://github.com/Salies" target="_blank" class="secondary">Daniel Serezane</a>
+      •
+      FCT-UNESP 2023
+  </small>
+</footer>
+</body>
+</html>

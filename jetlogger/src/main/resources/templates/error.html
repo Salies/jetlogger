@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jetlogger - Erro!</title>
+    <link rel="stylesheet" th:href="@{/css/pico.min.css}" href="../static/css/pico.min.css" />
+    <link rel="icon" type="image/x-icon" th:href="@{/img/fav.ico}" href="../static/img/fav.ico"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}" href="../static/css/login.css" />
+    <link rel="stylesheet" th:href="@{/css/error.css}" href="../static/css/error.css" />
+  </head>
+  <body>
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast">
+            <strong>jetlogger</strong>
+            </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <main class="container">
+      <article class="grid">
+        <div>
+        <h3 th:text="'Erro ' + ${statusCode}"></h3>
+        <p class="error" th:text="${message}"></p>
+        <p>
+            <a href="/" class="secondary">Voltar para a página inicial</a>
+        </p>
+        </div>
+        <div></div>
+      </article>
+    </main>
+    <!-- ./ Main -->
+
+    <!-- Footer -->
+    <footer class="container-fluid">
+      <small>Built by
+          <a href="https://github.com/CaduSantana" target="_blank" class="secondary">Cadu Santana</a>
+          and
+          <a href="https://github.com/Salies" target="_blank" class="secondary">Daniel Serezane</a>
+          •
+          FCT-UNESP 2023
+      </small>
+  </footer>
+  </body>
+</html>

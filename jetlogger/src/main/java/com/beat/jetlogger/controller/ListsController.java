@@ -1,9 +1,7 @@
 package com.beat.jetlogger.controller;
 
-import com.beat.jetlogger.model.Game;
-import com.beat.jetlogger.model.GameList;
-import com.beat.jetlogger.model.JetUser;
-import com.beat.jetlogger.model.SecurityUser;
+import com.beat.jetlogger.model.*;
+import com.beat.jetlogger.projections.FullGame;
 import com.beat.jetlogger.projections.Platform;
 import com.beat.jetlogger.repository.GameListRepository;
 import com.beat.jetlogger.repository.GameLogRepository;
@@ -18,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ListsController {
@@ -193,12 +189,27 @@ public class ListsController {
             platformsSet.add(g.getPlatform());
         }
 
+        // lista de jogos zerados
+        List<FullGame> played = this.gameLogRepository.findAllByList(list);
+        List<Game> notPlayed = new ArrayList<>();
+        String[] playedIds = new String[played.size()];
+        for(int i = 0; i < played.size(); i++) {
+            playedIds[i] = played.get(i).getGameId();
+        }
+        for(Game g : games) {
+            if(!Arrays.asList(playedIds).contains(g.getId().toString())) {
+                notPlayed.add(g);
+            }
+        }
+
         model.addAttribute("displayName", user.getDisplayName());
-        model.addAttribute("games", games);
         model.addAttribute("countGames", countGames);
         model.addAttribute("platforms", platformsSet);
         model.addAttribute("secondsPlayed", secondsPlayed);
         model.addAttribute("countPlayed", countPlayed);
+        model.addAttribute("listName", list.getName());
+        model.addAttribute("playedGames", played);
+        model.addAttribute("notPlayedGames", notPlayed);
 
         return "list";
     }

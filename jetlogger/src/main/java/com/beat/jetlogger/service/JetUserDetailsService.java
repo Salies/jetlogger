@@ -16,6 +16,13 @@ public class JetUserDetailsService implements UserDetailsService {
         this.jetUserRepository = jetUserRepository;
     }
 
+    /**
+     * Método que retorna um usuário do banco de dados. Trata-se de um especificação do UserDetails, do Spring,
+     * para funcionamento integrado com o Spring Security.
+     * @param username
+     * @return UserDetails
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return jetUserRepository

@@ -1,0 +1,26 @@
+.game-time, .game-extras {
+    display: flex;
+    align-items: center;
+}
+
+.game-time {
+    margin-bottom: var(--spacing);
+}
+
+.game-time span {
+    margin-right: 1rem;
+    margin-left: 0.3rem;
+}
+
+input[type="number"] {
+    margin: 0;
+}
+
+.game-extras > input[type="number"] {
+    max-width: 8rem;
+    margin-right: 1rem;
+}
+
+.game-extras {
+    margin: 0 0 var(--spacing) 0;
+}

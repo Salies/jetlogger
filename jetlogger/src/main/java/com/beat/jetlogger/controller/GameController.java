@@ -2,28 +2,28 @@ package com.beat.jetlogger.controller;
 
 import com.beat.jetlogger.model.Game;
 import com.beat.jetlogger.model.GameList;
+import com.beat.jetlogger.model.GameLog;
 import com.beat.jetlogger.repository.GameListRepository;
+import com.beat.jetlogger.repository.GameLogRepository;
 import com.beat.jetlogger.repository.GameRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
 public class GameController {
     private final GameListRepository gameListRepository;
     private final GameRepository gameRepository;
+    private final GameLogRepository gameLogRepository;
 
-    GameController(GameListRepository gameListRepository, GameRepository gameRepository) {
+    GameController(GameListRepository gameListRepository, GameRepository gameRepository, GameLogRepository gameLogRepository) {
         this.gameListRepository = gameListRepository;
         this.gameRepository = gameRepository;
+        this.gameLogRepository = gameLogRepository;
     }
-
-    /*@GetMapping("/game/{id}")
-    public String getGame(@PathVariable("id") String id) {
-        return "game";
-    }*/
 
     @GetMapping("/list/{id}/create-game")
     public String getCreateGame(@PathVariable("id") String listId, Model model) {
@@ -76,5 +76,50 @@ public class GameController {
         UUID listId = game.getList().getId();
         gameRepository.delete(game);
         return "redirect:/list/" + listId;
+    }
+
+    @GetMapping("/game/{id}/beat")
+    public String getBeatGame(@PathVariable("id") String gameId, Model model) {
+        Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
+        model.addAttribute("game", game);
+        model.addAttribute("listId", game.getList().getId());
+        return "beat-game";
+    }
+
+    @PostMapping("/game/{id}/beat")
+    public String postBeatGame(
+            Model model,
+            @PathVariable("id") String gameId,
+            @RequestParam("started_date") LocalDate startedDate,
+            @RequestParam("finished_date") LocalDate finishedDate,
+            @RequestParam("hours") int hoursPlayed,
+            @RequestParam("minutes") int minutesPlayed,
+            @RequestParam("seconds") int secondsPlayed,
+            @RequestParam("rating") int rating,
+            @RequestParam(value = "mastered", required = false) String mastered
+    ) {
+        Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
+        GameList list = game.getList();
+
+        int hoursInSeconds = hoursPlayed * 3600;
+        int minutesInSeconds = minutesPlayed * 60;
+        Integer totalSecondsPlayed = hoursInSeconds + minutesInSeconds + secondsPlayed;
+
+        Boolean masteredBoolean = false;
+        if(mastered != null) masteredBoolean = true;
+
+        GameLog gameLog = new GameLog(
+                game,
+                list,
+                rating,
+                startedDate,
+                finishedDate,
+                totalSecondsPlayed,
+                masteredBoolean
+        );
+
+        gameLogRepository.save(gameLog);
+
+        return "redirect:/list/" + list.getId();
     }
 }

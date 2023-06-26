@@ -26,11 +26,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        String[] allowed = new String[] {
+                "/css/**",
+                "/img/**",
+                "/register"
+        };
         // Permite que pedidos ao diretório /static (de recursos estáticos)
         // sejam respondidos sem necessidade de autenticação.
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/css/**", "/img/**").permitAll()
+                        .requestMatchers(allowed).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form.loginPage("/login")
@@ -41,7 +46,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

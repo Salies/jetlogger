@@ -1,0 +1,53 @@
+h1, .filters {
+    margin-bottom:1rem;
+}
+
+hr {
+    margin: 1.5rem 0;
+}
+
+.games-info {
+    text-align: center;
+}
+
+.games-info > span{
+    display: block;
+}
+
+.games-info > span:first-of-type {
+    font-size: 2rem;
+    font-weight: bolder;
+    color: #fff;
+}
+
+@media (min-width: 576px) {
+    .filters {
+        max-width: 640px;
+    }
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+}
+
+.filters span {
+    margin-right: 0.3rem;
+}
+
+.filters > select:first-of-type {
+    margin-right: 2rem;
+}
+
+select {
+    margin:0;
+}
+
+summary[role="link"].secondary:is([aria-current], :hover, :active, :focus) {
+    background-color: transparent;
+    color: var(--secondary-hover);
+}
+
+footer {
+    padding: 0 0 0 1rem!important;
+}

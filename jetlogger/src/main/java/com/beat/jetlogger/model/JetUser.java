@@ -16,20 +16,11 @@ import java.util.UUID;
 public class JetUser implements UserDetails {
     public JetUser() {}
 
-    public JetUser(String username, String password, String displayName, String realName) {
-        this.id = UUID.randomUUID();
-        this.username = username;
-        this.password = password;
-        this.displayName = displayName;
-        this.realName = realName;
-    }
-
     public JetUser(String username, String password, String displayName) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.password = password;
         this.displayName = displayName;
-        this.realName = displayName;
     }
 
     @Id
@@ -48,10 +39,6 @@ public class JetUser implements UserDetails {
     @Basic(optional = false)
     @Column(name = "display_name", nullable = false, length = 32)
     private String displayName;
-
-    @Basic(optional = false)
-    @Column(name = "real_name", nullable = false, length = 128)
-    private String realName;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

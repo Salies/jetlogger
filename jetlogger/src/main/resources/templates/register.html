@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jetlogger - Criar conta</title>
+  <link th:href="@{/css/pico.min.css}" href="../static/css/pico.min.css" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" th:href="@{/img/fav.ico}" href="../static/img/fav.ico"/>
+  <link th:href="@{/css/register.css}" href="../static/css/register.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="container-fluid">
+  <ul>
+    <li>
+      <a href="./" class="contrast">
+        <strong>jetlogger</strong>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- Main -->
+<main class="container">
+  <article>
+    <div>
+      <hgroup>
+        <h2>Criar conta</h2>
+        <h3>Por favor preencha os campos abaixo para criação de sua conta na Jetlogger</h3>
+      </hgroup>
+      <p th:if="${param.error}" class="error">Erro ao criar conta: nome de usuário existente!</p>
+      <form th:action="@{/register}" method="post">
+        <div class="grid">
+          <input type="text" name="username" placeholder="Nome de usuário" aria-label="username" required />
+          <input type="password" name="password" placeholder="Senha" aria-label="password" required />
+        </div>
+        <div class="grid">
+          <input type="text" name="display-name" placeholder="Nome de exibição (ex.: ZezinhoGamerZxXx)" aria-label="display-name" required />
+        </div>
+        <button type="submit" class="contrast">Criar conta</button>
+      </form>
+    </div>
+  </article>
+</main>
+<!-- ./ Main -->
+
+<!-- Footer -->
+<footer class="container-fluid">
+  <small>Built by
+      <a href="https://github.com/CaduSantana" target="_blank" class="secondary">Cadu Santana</a>
+      and
+      <a href="https://github.com/Salies" target="_blank" class="secondary">Daniel Serezane</a>
+      •
+      FCT-UNESP 2023
+  </small>
+</footer>
+</body>
+</html>

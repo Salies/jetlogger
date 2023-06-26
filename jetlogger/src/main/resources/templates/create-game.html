@@ -23,14 +23,17 @@
   <article>
     <div>
       <hgroup>
-        <h2>Criar conta</h2>
-        <h3>Dê um nome a sua lista!</h3>
+        <h2 th:text="${format} +' game na lista'"></h2>
+        <h3 th:text="${listName}"></h3>
       </hgroup>
-      <form th:action="@{/game/create}" method="post">
-        <input type="text" name="name" placeholder="Nome da lista" aria-label="name" required />
-        <button type="submit" class="contrast">Criar lista</button>
+      <form th:action="'/list/' + ${listId} + '/game/create'" method="post">
+        <div class="grid">
+          <input type="text" name="name" placeholder="Nome" aria-label="name" required />
+          <input type="text" name="platform" placeholder="Plataforma" aria-label="platform" required />
+        </div>
+        <button type="submit" class="contrast">Adicionar jogo na lista</button>
       </form>
-      <a href="/lists" class="secondary">Voltar</a>
+      <a th:href="'/list/' + ${listId}" class="secondary">Voltar</a>
     </div>
   </article>
 </main>

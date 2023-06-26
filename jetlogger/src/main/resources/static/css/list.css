@@ -21,3 +21,7 @@
 .game-options a:last-of-type{
     margin-right: 0;
 }
+
+.add-game-div {
+    text-align: right;
+}

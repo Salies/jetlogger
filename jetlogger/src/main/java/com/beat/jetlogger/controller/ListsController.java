@@ -210,6 +210,7 @@ public class ListsController {
         model.addAttribute("listName", list.getName());
         model.addAttribute("playedGames", played);
         model.addAttribute("notPlayedGames", notPlayed);
+        model.addAttribute("listId", id);
 
         return "list";
     }

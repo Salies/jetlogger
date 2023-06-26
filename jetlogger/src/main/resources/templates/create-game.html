@@ -26,12 +26,19 @@
         <h2 th:text="${format} +' game na lista'"></h2>
         <h3 th:text="${listName}"></h3>
       </hgroup>
-      <form th:action="'/list/' + ${listId} + '/game/create'" method="post">
+      <form th:if="${format == 'Adicionar'}" th:action="'/list/' + ${listId} + '/create-game'" method="post">
         <div class="grid">
           <input type="text" name="name" placeholder="Nome" aria-label="name" required />
           <input type="text" name="platform" placeholder="Plataforma" aria-label="platform" required />
         </div>
         <button type="submit" class="contrast">Adicionar jogo na lista</button>
+      </form>
+      <form th:if="${format == 'Editar'}" th:action="'/game/' + ${gameId}" method="post">
+        <div class="grid">
+          <input type="text" name="name" placeholder="Nome" aria-label="name" th:value="${gameName}" required />
+          <input type="text" name="platform" placeholder="Plataforma" aria-label="platform" th:value="${gamePlatform}" required />
+        </div>
+        <button type="submit" class="contrast">Editar jogo</button>
       </form>
       <a th:href="'/list/' + ${listId}" class="secondary">Voltar</a>
     </div>

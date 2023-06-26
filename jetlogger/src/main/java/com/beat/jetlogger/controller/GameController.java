@@ -19,6 +19,12 @@ public class GameController {
     private final GameRepository gameRepository;
     private final GameLogRepository gameLogRepository;
 
+    /**
+     * Construtor do controlador responsável por gerenciar as rotas relacionadas aos jogos.
+     * @param gameListRepository Spring Data JPA Repository para a entidade GameList.
+     * @param gameRepository Spring Data JPA Repository para a entidade Game.
+     * @param gameLogRepository Spring Data JPA Repository para a entidade GameLog.
+     */
     GameController(GameListRepository gameListRepository, GameRepository gameRepository, GameLogRepository gameLogRepository) {
         this.gameListRepository = gameListRepository;
         this.gameRepository = gameRepository;

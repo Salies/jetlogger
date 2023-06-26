@@ -9,6 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ErrorControllerImpl implements ErrorController {
+
+    /**
+     * Mapping customizado para a página de erro.
+     * Trata alguns erros específicos mais conhecidos (404, 500, 403, 401, 400),
+     * retorna uma mensagem padrão ao usuário caso contrário.
+     * @param request Pedido que ocasionou o erro.
+     * @param model Modelo para a página de erro.
+     * @return Caminho para o template da página de erro.
+     */
     @RequestMapping("/error")
     public String getError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

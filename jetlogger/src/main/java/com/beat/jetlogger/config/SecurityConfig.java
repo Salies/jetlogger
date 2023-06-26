@@ -16,14 +16,19 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final JetUserDetailsService userDetailsService;
+
+    /**
+     * Construtor da classe SecurityConfig.
+     * @param userDetailsService Implementação de JetUserDetailsService. Injetado pelo Spring.
+     */
     public SecurityConfig(JetUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     /**
      * Configuração de segurança do Spring Security. Define o padrão de resposta para pedidos.
-     * @param http
-     * @return SecurityFilterChain
+     * @param http Configuração de segurança do Spring Security.
+     * @return Configuração http SecurityFilterChain.
      * @throws Exception
      * */
     @Bean
@@ -48,7 +53,7 @@ public class SecurityConfig {
 
     /**
      * Configuração de encriptação de senhas.
-     * @return PasswordEncoder
+     * @return Encoder para as senhas PasswordEncoder. Utilizado para encriptar as senhas dos usuários.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {

@@ -15,5 +15,10 @@ public interface GameRepository extends CrudRepository<Game, UUID> {
     Integer countByListJetUserCreatedAndCreatedAtAfter(JetUser user, LocalDateTime date);
     Integer countByListJetUserCreatedAndPlatformAndCreatedAtAfter(JetUser user, String platform, LocalDateTime date);
     Iterable<Platform> findAllByListJetUserCreated(JetUser user);
+    // mesma coisa, mas para lista
     Iterable<Game> findAllByList(GameList list);
+    Integer countByList(GameList list);
+    Integer countByListAndPlatform(GameList list, String platform);
+    Integer countByListAndCreatedAtAfter(GameList list, LocalDateTime date);
+    Integer countByListAndPlatformAndCreatedAtAfter(GameList list, String platform, LocalDateTime date);
 }

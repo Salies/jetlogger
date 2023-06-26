@@ -34,6 +34,15 @@ public class ListsController {
         this.gameLogRepository = gameLogRepository;
     }
 
+    private LocalDateTime fromDateRange(String dateRange) {
+        return switch (dateRange) {
+            case "week" -> LocalDateTime.now().minusWeeks(1);
+            case "month" -> LocalDateTime.now().minusMonths(1);
+            case "year" -> LocalDateTime.now().minusYears(1);
+            default -> LocalDateTime.now();
+        };
+    }
+
     @GetMapping("/lists")
     String lists(
             Authentication authentication,
@@ -51,9 +60,6 @@ public class ListsController {
         Iterable<GameList> lists;
         // count de games adicionados em listas
         Integer countGames;
-        // plataformas pra alimentar o dropdown
-        // daria pra pegar o count por aqui também, mas aí tem cara de gambiarra
-        Iterable<Platform> platforms;
         // segundos jogados pelo usuário
         Integer secondsPlayed;
         // jogos zerados pelo usuário
@@ -65,24 +71,18 @@ public class ListsController {
         lists = this.gameListRepository.findGameListsByJetUserCreated_Id(user.getId());
 
         if(!dateRange.equals("all")) {
-            LocalDateTime dateTime = switch (dateRange) {
-                case "week" -> LocalDateTime.now().minusWeeks(1);
-                case "month" -> LocalDateTime.now().minusMonths(1);
-                case "year" -> LocalDateTime.now().minusYears(1);
-                default -> LocalDateTime.now();
-            };
-
+            LocalDateTime dateTime = fromDateRange(dateRange);
             LocalDate date = dateTime.toLocalDate();
 
             if(platform.equals("all")){
                 countGames = this.gameRepository.countByListJetUserCreatedAndCreatedAtAfter(user, dateTime);
                 secondsPlayed = this.gameLogRepository.sumSecondsPlayedByListByJetUserAndAfterDate(user, date);
-                countPlayed = this.gameLogRepository.countByListJetUserCreatedAndCreatedAtAfter(user, date);
+                countPlayed = this.gameLogRepository.countByListJetUserCreatedAndFinishedDateAfter(user, date);
             }
             else {
                 countGames = this.gameRepository.countByListJetUserCreatedAndPlatformAndCreatedAtAfter(user, platform, dateTime);
                 secondsPlayed = this.gameLogRepository.sumSecondsPlayedByListByJetUserAndPlatformAndAfterDate(user, platform, date);
-                countPlayed = this.gameLogRepository.countByListJetUserCreatedAndGamePlatformAndCreatedAtAfter(user, platform, date);
+                countPlayed = this.gameLogRepository.countByListJetUserCreatedAndGamePlatformAndFinishedDateAfter(user, platform, date);
             }
         } else if (!platform.equals("all")) {
             countGames = this.gameRepository.countByListJetUserCreatedAndPlatform(user, platform);
@@ -97,7 +97,9 @@ public class ListsController {
         // a p*** da soma retorna nulo
         if(secondsPlayed == null) secondsPlayed = 0;
 
-        platforms = this.gameRepository.findAllByListJetUserCreated(user);
+        // plataformas pra alimentar o dropdown
+        // daria pra pegar o count por aqui também, mas aí tem cara de gambiarra
+        Iterable<Platform> platforms = this.gameRepository.findAllByListJetUserCreated(user);
 
         // to set of Strings (não repete plataformas)
         Set<String> platformsSet = new HashSet<>();
@@ -143,21 +145,60 @@ public class ListsController {
         if(platform.isEmpty()) platform="all";
         if(dateRange.isEmpty()) dateRange="all";
 
+        // count de games adicionados na lista
+        Integer countGames;
+        // segundos jogados pelo usuário na lista
+        Integer secondsPlayed;
+        // jogos zerados pelo usuário na lista
+        Integer countPlayed;
+
         // displayName do usuário
         JetUser user = ((SecurityUser) authentication.getPrincipal()).getUser();
 
         // get list by id
         GameList list = this.gameListRepository.findById(UUID.fromString(id)).orElseThrow();
 
+        if(!dateRange.equals("all")) {
+            LocalDateTime dateTime = fromDateRange(dateRange);
+            LocalDate date = dateTime.toLocalDate();
+
+            if(platform.equals("all")){
+                countGames = this.gameRepository.countByListAndCreatedAtAfter(list, dateTime);
+                secondsPlayed = this.gameLogRepository.sumSecondsPlayedByListAndAfterDate(list, date);
+                countPlayed = this.gameLogRepository.countByListAndFinishedDateAfter(list, date);
+            }
+            else {
+                countGames = this.gameRepository.countByListAndPlatformAndCreatedAtAfter(list, platform, dateTime);
+                secondsPlayed = this.gameLogRepository.sumSecondsPlayedByListAndPlatformAndAfterDate(list, platform, date);
+                countPlayed = this.gameLogRepository.countByListAndGamePlatformAndFinishedDateAfter(list, platform, date);
+            }
+        } else if (!platform.equals("all")) {
+            countGames = this.gameRepository.countByListAndPlatform(list, platform);
+            secondsPlayed = this.gameLogRepository.sumSecondsPlayedByListAndPlatform(list, platform);
+            countPlayed = this.gameLogRepository.countByListAndGamePlatform(list, platform);
+        } else {
+            countGames = this.gameRepository.countByList(list);
+            secondsPlayed = this.gameLogRepository.sumSecondsPlayedByList(list);
+            countPlayed = this.gameLogRepository.countByList(list);
+        }
+        // a p*** da soma retorna nulo
+        if(secondsPlayed == null) secondsPlayed = 0;
+
         // get games by list
         Iterable<Game> games = this.gameRepository.findAllByList(list);
+        // criando os sets
+        // plataforma
+        Set<String> platformsSet = new HashSet<>();
+        for(Game g : games) {
+            platformsSet.add(g.getPlatform());
+        }
 
         model.addAttribute("displayName", user.getDisplayName());
         model.addAttribute("games", games);
-        model.addAttribute("countGames", 0);
-        model.addAttribute("platforms", 0);
-        model.addAttribute("secondsPlayed", 0);
-        model.addAttribute("countPlayed", 0);
+        model.addAttribute("countGames", countGames);
+        model.addAttribute("platforms", platformsSet);
+        model.addAttribute("secondsPlayed", secondsPlayed);
+        model.addAttribute("countPlayed", countPlayed);
 
         return "list";
     }

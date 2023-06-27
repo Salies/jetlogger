@@ -77,6 +77,7 @@ public class GameController {
         Game game = gameRepository.findById(UUID.fromString(gameId)).orElseThrow();
         String listName = game.getList().getName();
         model.addAttribute("listName", listName);
+        model.addAttribute("listId", game.getList().getId());
         model.addAttribute("format", "Editar");
         model.addAttribute("game", game);
         return "create-game";

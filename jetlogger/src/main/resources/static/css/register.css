@@ -63,3 +63,7 @@ body > footer {
 .error {
     color: #c54a69;
 }
+
+main > article {
+    margin: 0;
+}
